@@ -19,7 +19,6 @@
 
 <script setup>
 import { ref } from "vue";
-// import { reactive } from "vue";
 import axios from "axios";
 
 const title = ref("");
@@ -27,9 +26,10 @@ const title = ref("");
 async function sendPost(event) {
   event.preventDefault();
   const response = await axios.post("http://localhost:4001/posts", {
-    title: title,
+    title: title.value,
   });
-  console.log(response);
+  console.log(response.data);
+  title.value = "";
 }
 </script>
 
