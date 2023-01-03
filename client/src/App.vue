@@ -1,5 +1,7 @@
 <script setup>
-import { PostCreate } from "./components/PostCreate.vue";
+import PostCreate from "./components/PostCreate.vue";
 </script>
 
-<template></template>
+<template>
+  <PostCreate></PostCreate>
+</template>
