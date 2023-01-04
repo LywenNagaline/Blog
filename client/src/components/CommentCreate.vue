@@ -19,24 +19,15 @@
 
 <script setup>
 import { ref } from "vue";
-import axios from "axios";
 
 const newComment = ref("");
 
-const props = defineProps({
-  postId: String,
-});
+const emit = defineEmits(["createComment"]);
 
 async function sendComment(event) {
   //On empêche le reload de la page sinon la requête axios ne pourra pas se faire
   event.preventDefault();
-  const response = await axios.post(
-    `http://localhost:4001/posts/${props.postId}/comments`,
-    {
-      content: newComment.value,
-    }
-  );
-  console.log("sendComment", response.data);
+  emit("createComment", newComment.value);
   newComment.value = "";
 }
 </script>
