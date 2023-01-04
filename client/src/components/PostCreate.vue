@@ -2,18 +2,18 @@
   <div class="PostCreate">
     <h1>Create Post</h1>
     <div>
-      <form>
+      <form @submit="sendPost">
         <div class="form-group">
           <label>{{ title || "Titre" }}</label>
           <input
             class="form-control"
+            required="required"
+            type="text"
             v-model="title"
             placeholder="Ecrire le titre"
           />
         </div>
-        <button class="btn btn-primary" @click="sendPost" required>
-          Submit
-        </button>
+        <button class="btn btn-primary">Submit</button>
       </form>
     </div>
   </div>
@@ -21,16 +21,15 @@
 
 <script setup>
 import { ref } from "vue";
-import axios from "axios";
 
 const title = ref("");
 
+const emit = defineEmits(["submitPost"]);
+
 async function sendPost(event) {
+  //On empêche le reload de la page sinon la requête axios ne pourra pas se faire
   event.preventDefault();
-  const response = await axios.post("http://localhost:4001/posts", {
-    title: title.value,
-  });
-  console.log("sendPost", response.data);
+  emit("submitPost", title.value);
   title.value = "";
 }
 </script>
