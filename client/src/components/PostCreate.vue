@@ -11,7 +11,9 @@
             placeholder="Ecrire le titre"
           />
         </div>
-        <button class="btn btn-primary" @click="sendPost">Submit</button>
+        <button class="btn btn-primary" @click="sendPost" required>
+          Submit
+        </button>
       </form>
     </div>
   </div>
@@ -28,7 +30,7 @@ async function sendPost(event) {
   const response = await axios.post("http://localhost:4001/posts", {
     title: title.value,
   });
-  console.log(response.data);
+  console.log("sendPost", response.data);
   title.value = "";
 }
 </script>
