@@ -24,6 +24,7 @@ import { ref } from "vue";
 
 const title = ref("");
 
+// On créer un event qui va envoyer la valeur du titre lors du click sur le submit. Il sera récupéré dans APP
 const emit = defineEmits(["submitPost"]);
 
 async function sendPost(event) {
