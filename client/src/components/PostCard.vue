@@ -17,12 +17,10 @@ import CommentCreate from "./CommentCreate.vue";
 import CommentList from "./CommentList.vue";
 import axios from "axios";
 import { onMounted, reactive } from "vue";
-
 //Creation de la props pour transmettre les données du post à PostList
 const props = defineProps({
   currentPost: Object,
 });
-
 async function sendCommentToBackEnd(comment) {
   await axios.post(
     `http://localhost:4001/posts/${props.currentPost.id}/comments`,
@@ -32,16 +30,13 @@ async function sendCommentToBackEnd(comment) {
   );
   await fetchComments();
 }
-
 //GESTION DE L'AFFICHAGE
 onMounted(() => {
   fetchComments();
 });
-
 const state = reactive({
   comments: [],
 });
-
 async function fetchComments() {
   const response = await axios.get(
     `http://localhost:4001/posts/${props.currentPost.id}/comments`

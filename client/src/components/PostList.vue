@@ -9,9 +9,21 @@
 </template>
 
 <script setup>
+// import axios from "axios";
 import axios from "axios";
 import { onMounted, reactive, computed } from "vue";
 import PostCard from "./PostCard.vue";
+
+const propsPost = defineProps({
+  post: Object,
+});
+const sortedPosts = computed(() => {
+  const transformedPosts = [];
+  for (const post of Object.values(propsPost.post)) {
+    transformedPosts.push(post);
+  }
+  return transformedPosts;
+});
 
 const state = reactive({
   posts: {},
@@ -22,15 +34,9 @@ async function fetchPosts() {
   state.posts = response.data;
 }
 
-const sortedPosts = computed(() => {
-  const transformedPosts = [];
-  for (const post of Object.values(state.posts)) {
-    transformedPosts.push(post);
-  }
-  return transformedPosts;
-});
-
 onMounted(() => {
   fetchPosts();
 });
 </script>
+
+<style></style>

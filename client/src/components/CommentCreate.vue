@@ -19,11 +19,8 @@
 
 <script setup>
 import { ref } from "vue";
-
 const newComment = ref("");
-
 const emit = defineEmits(["createComment"]);
-
 async function sendComment(event) {
   //On empêche le reload de la page sinon la requête axios ne pourra pas se faire
   event.preventDefault();
